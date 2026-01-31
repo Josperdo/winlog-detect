@@ -35,7 +35,22 @@ python detect.py
 ```
 By default, it uses the sample CSV in sample_data/events.csv and writes alerts to alerts.csv.
 
+## Running Tests
+Run the full test suite with pytest:
+```bash
+pytest
+```
 
+For verbose output:
+```bash
+pytest -v
+```
+
+The test suite includes:
+- **Unit tests** (`test_detectors.py`) - Tests against sample data
+- **Scenario tests** (`test_scenarios.py`) - 7 comprehensive attack scenarios including brute force, encoded PowerShell, certutil abuse, and combined attack chains
+
+All tests run automatically via GitHub Actions CI on every push.
 
 ## Project Structure
 ```bash
@@ -44,7 +59,10 @@ winlog-detect/
 ├── detectors.py              # Detection functions
 ├── sample_data/events.csv    # Sample log data
 ├── scripts/export_events.ps1 # Windows log export helper
-├── tests/                    # Basic unit tests
+├── tests/
+│   ├── conftest.py           # Pytest configuration
+│   ├── test_detectors.py     # Unit tests
+│   └── test_scenarios.py     # Comprehensive scenario tests
 ├── requirements.txt          # Python dependencies
 ├── Makefile                  # Convenience commands
 ├── .github/workflows/ci.yml  # CI test workflow
@@ -64,7 +82,8 @@ If you get a script execution policy error, run:
 ```
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 ```
-## Detection Logic ##
+
+## Detection Logic
 
 **Failed-Logon Surge (4625)**
 
@@ -81,13 +100,14 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
   - wmic
   - and others
 
-## Tech Used ##
+## Tech Stack
 
-- Python — pandas for CSV parsing and analysis
-- PowerShell — log export script
-- GitHub Actions — CI pipeline for running tests
+- **Python** — pandas for CSV parsing and analysis
+- **pytest** — comprehensive test coverage with scenario-based testing
+- **PowerShell** — log export script
+- **GitHub Actions** — CI pipeline for running tests
 
-## Licnense ##
+## License
 
 This project is released under the MIT License.
 It is intended for educational and defensive purposes only.
