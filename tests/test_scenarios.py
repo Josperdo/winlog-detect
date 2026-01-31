@@ -3,13 +3,7 @@ Comprehensive test scenarios for Winlog-Detect
 Tests the detection logic with controlled, realistic data
 """
 import pandas as pd
-from pathlib import Path
 from detectors import failed_logon_surge, suspicious_process_creation
-import sys
-
-ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
 
 
 def create_test_df(events_list):
